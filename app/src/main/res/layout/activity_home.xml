@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Main Content -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <!-- Top Menu Icon -->
+        <ImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/menu"
+            android:contentDescription="Menu Icon" />
+
+
+        <!-- Tamil Roots Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/menu_icon"
+            android:layout_marginStart="8dp"
+            android:layout_alignTop="@id/menu_icon"
+            android:text="தமிழ் Roots"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <!-- Search Bar -->
+        <LinearLayout
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_icon"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:background="#8BC34A"
+            android:padding="8dp"
+            android:elevation="4dp">
+
+            <EditText
+                android:id="@+id/search_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Search"
+                android:padding="8dp"
+                android:background="@android:color/transparent"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_search"
+                android:tint="#000000"
+                android:contentDescription="Search Icon" />
+        </LinearLayout>
+
+        <!-- MapView -->
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/search_bar"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Buttons -->
+        <GridLayout
+            android:id="@+id/buttons_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/map_view"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:columnCount="2"
+            android:rowCount="3"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_food"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:text="Food"
+                android:backgroundTint="#4CAF50"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btn_place"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:text="Place"
+                android:backgroundTint="#B71C1C"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btn_cloth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:text="Cloth"
+                android:backgroundTint="#FF5722"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btn_flower"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:text="Flower"
+                android:backgroundTint="#616161"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btn_temple"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:text="Temple"
+                android:backgroundTint="#FFF9C4"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/btn_festival"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:text="Festival"
+                android:backgroundTint="#1A237E"
+                android:textColor="#FFFFFF" />
+        </GridLayout>
+    </RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
