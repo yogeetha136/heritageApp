@@ -12,6 +12,10 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import android.view.MenuInflater
+import android.view.View
+import android.widget.Button
+import android.widget.PopupMenu
 
 class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -35,6 +39,22 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         mapView = findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+
+        // Initialize Buttons
+        val btnFood: Button = findViewById(R.id.btn_food)
+        val btnPlace: Button = findViewById(R.id.btn_place)
+        val btnCloth: Button = findViewById(R.id.btn_cloth)
+        val btnFlower: Button = findViewById(R.id.btn_flower)
+        val btnTemple: Button = findViewById(R.id.btn_temple)
+        val btnFestival: Button = findViewById(R.id.btn_festival)
+
+        // Setting click listeners to show popup menu
+        btnFood.setOnClickListener { showPopupMenu(it) }
+        btnPlace.setOnClickListener { showPopupMenu(it) }
+        btnCloth.setOnClickListener { showPopupMenu(it) }
+        btnFlower.setOnClickListener { showPopupMenu(it) }
+        btnTemple.setOnClickListener { showPopupMenu(it) }
+        btnFestival.setOnClickListener { showPopupMenu(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,6 +78,28 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         val tamilNadu = LatLng(10.8505, 76.2711)
         googleMap.addMarker(MarkerOptions().position(tamilNadu).title("Tamil Nadu"))
         googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(tamilNadu, 7f))
+    }
+
+    // Popup Menu Function
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(this, view)
+        val inflater: MenuInflater = popupMenu.menuInflater
+        inflater.inflate(R.menu.popup_menu, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.menu_ratings -> {
+                    Toast.makeText(this, "Ratings Selected", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.menu_highly_visited -> {
+                    Toast.makeText(this, "Highly Visited Selected", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
     }
 
     override fun onResume() {
