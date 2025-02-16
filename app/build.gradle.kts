@@ -17,6 +17,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding = true  // ✅ Enables ViewBinding
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -26,12 +30,14 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17  // ✅ Updated to Java 17 (optional)
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
@@ -42,8 +48,16 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // Google Maps dependency
+    // ✅ Google Maps dependency
     implementation("com.google.android.gms:play-services-maps:18.1.0")
+
+    // ✅ Lifecycle components (ViewModel, LiveData)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+
+    // ✅ Coroutines (for background tasks)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
