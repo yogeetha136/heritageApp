@@ -28,6 +28,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".FoodActivity"></activity>
+
 
         <!-- Google Maps API Key -->
         <meta-data

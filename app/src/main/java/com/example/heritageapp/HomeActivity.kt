@@ -2,6 +2,7 @@ package com.example.heritageapp
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent // Import this to use Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -52,8 +53,14 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback { // Implement OnMa
         val btnTemple: Button = findViewById(R.id.btn_temple)
         val btnFestival: Button = findViewById(R.id.btn_festival)
 
-        // Setting click listeners to show popup menu
-        listOf(btnFood, btnPlace, btnCloth, btnFlower, btnTemple, btnFestival).forEach { button ->
+        // Set click listener for btnFood to start FoodActivity
+        btnFood.setOnClickListener {
+            val intent = Intent(this, FoodActivity::class.java) // Create an Intent to start FoodActivity
+            startActivity(intent) // Start the new activity
+        }
+
+        // Setting click listeners to show popup menu for other buttons
+        listOf(btnPlace, btnCloth, btnFlower, btnTemple, btnFestival).forEach { button ->
             button.setOnClickListener { showPopupMenu(it) }
         }
     }
