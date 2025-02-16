@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodActivity">
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/back"
+        android:contentDescription="Back Button"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        android:padding="16dp">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="6"
+            android:layout_gravity="center"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/btnChennai"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Chennai"
+                android:backgroundTint="#D1BFA5"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnMadurai"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Madurai"
+                android:backgroundTint="#FF8369"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnCoimbatore"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Coimbatore"
+                android:backgroundTint="#E53935"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnTrichy"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Trichy"
+                android:backgroundTint="#A7DBD8"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnSalem"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Salem"
+                android:backgroundTint="#00A896"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnTirunelveli"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Tirunelveli"
+                android:backgroundTint="#FF8A5C"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnErode"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Erode"
+                android:backgroundTint="#4F3A65"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnThoothukudi"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Thoothukudi"
+                android:backgroundTint="#E5A5B6"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnVellore"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Vellore"
+                android:backgroundTint="#A8A23D"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnTanjavur"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Tanjavur"
+                android:backgroundTint="#D89AD4"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnTirupur"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Tirupur"
+                android:backgroundTint="#C73558"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnSivakasi"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Sivakasi"
+                android:backgroundTint="#2B2E4A"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+        </GridLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
