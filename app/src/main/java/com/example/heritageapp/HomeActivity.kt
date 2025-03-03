@@ -68,6 +68,46 @@ class HomeActivity : AppCompatActivity() {
                 )
             )
         }
+        btnPlace.setOnClickListener { v: View? ->
+            startActivity(
+                Intent(
+                    this,
+                    PlaceActivity::class.java
+                )
+            )
+        }
+        btnCloth.setOnClickListener { v: View? ->
+            startActivity(
+                Intent(
+                    this,
+                    ClothActivity::class.java
+                )
+            )
+        }
+        btnFlower.setOnClickListener { v: View? ->
+            startActivity(
+                Intent(
+                    this,
+                    FlowerActivity::class.java
+                )
+            )
+        }
+        btnTemple.setOnClickListener { v: View? ->
+            startActivity(
+                Intent(
+                    this,
+                    TempleActivity::class.java
+                )
+            )
+        }
+        btnFestival.setOnClickListener { v: View? ->
+            startActivity(
+                Intent(
+                    this,
+                    FestivalActivity::class.java
+                )
+            )
+        }
 
         val popupListener =
             View.OnClickListener { view: View -> this.showPopupMenu(view) }
