@@ -44,6 +44,9 @@ dependencies {
 
     // Google Maps dependency
     implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation ("org.osmdroid:osmdroid-android:6.1.16") // Latest version
+
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <!-- Main Content -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,8 +41,8 @@
             android:id="@+id/menu_icon"
             android:layout_width="36dp"
             android:layout_height="34dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="329dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="12dp"
             android:contentDescription="Menu Icon"
             android:src="@drawable/menu" />
@@ -78,34 +77,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_search"
-                app:tint="#000000"
                 android:contentDescription="Search Icon" />
         </LinearLayout>
 
-        <!-- MapView -->
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/map_view"
+        <!-- OpenStreetMap (OSM) View -->
+        <org.osmdroid.views.MapView
+            android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:layout_below="@id/search_bar"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="16dp"/>
 
         <!-- Buttons Grid -->
         <GridLayout
             android:id="@+id/buttons_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/map_view"
+            android:layout_below="@id/mapView"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:columnCount="2"
-            android:rowCount="3"
-            android:orientation="horizontal">
+            android:rowCount="3">
 
-            <!-- Button 1 -->
             <Button
                 android:id="@+id/btn_food"
                 android:layout_width="0dp"
@@ -116,7 +112,6 @@
                 android:backgroundTint="#4CAF50"
                 android:textColor="#FFFFFF" />
 
-            <!-- Button 2 -->
             <Button
                 android:id="@+id/btn_place"
                 android:layout_width="0dp"
@@ -127,7 +122,6 @@
                 android:backgroundTint="#B71C1C"
                 android:textColor="#FFFFFF" />
 
-            <!-- Button 3 -->
             <Button
                 android:id="@+id/btn_cloth"
                 android:layout_width="0dp"
@@ -138,7 +132,6 @@
                 android:backgroundTint="#FF5722"
                 android:textColor="#FFFFFF" />
 
-            <!-- Button 4 -->
             <Button
                 android:id="@+id/btn_flower"
                 android:layout_width="0dp"
@@ -149,7 +142,6 @@
                 android:backgroundTint="#616161"
                 android:textColor="#FFFFFF" />
 
-            <!-- Button 5 -->
             <Button
                 android:id="@+id/btn_temple"
                 android:layout_width="0dp"
@@ -157,10 +149,9 @@
                 android:layout_columnWeight="1"
                 android:layout_margin="8dp"
                 android:text="Temple"
-                android:backgroundTint="#FFF9C4"
-                android:textColor="#000000" />
+                android:backgroundTint="#616161"
+                android:textColor="#FFFFFF" />
 
-            <!-- Button 6 -->
             <Button
                 android:id="@+id/btn_festival"
                 android:layout_width="0dp"
@@ -168,9 +159,8 @@
                 android:layout_columnWeight="1"
                 android:layout_margin="8dp"
                 android:text="Festival"
-                android:backgroundTint="#03A9F4"
+                android:backgroundTint="#616161"
                 android:textColor="#FFFFFF" />
         </GridLayout>
     </RelativeLayout>
-
 </androidx.drawerlayout.widget.DrawerLayout>
