@@ -47,6 +47,7 @@ dependencies {
     implementation ("org.osmdroid:osmdroid-android:6.1.16") // Latest version
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
 
 

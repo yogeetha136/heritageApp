@@ -119,23 +119,30 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun addMarkers() {
-        val locations = Arrays.asList(
-            GeoPoint(28.6139, 77.2090),  // Delhi
-            GeoPoint(12.9716, 77.5946),  // Bengaluru
-            GeoPoint(19.0760, 72.8777),  // Mumbai
-            GeoPoint(13.0827, 80.2707),  // Chennai
-            GeoPoint(22.5726, 88.3639) // Kolkata
+        val locations = listOf(
+            Pair(GeoPoint(28.6139, 77.2090), "Delhi"),
+            Pair(GeoPoint(12.9716, 77.5946), "Bengaluru"),
+            Pair(GeoPoint(19.0760, 72.8777), "Mumbai"),
+            Pair(GeoPoint(13.0827, 80.2707), "Chennai"),
+            Pair(GeoPoint(22.5726, 88.3639), "Kolkata")
         )
 
-        for (point in locations) {
+        for ((point, name) in locations) {
             val marker = Marker(mapView)
             marker.position = point
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-            marker.title = "Location: " + point.latitude + ", " + point.longitude
+            marker.title = name
+
+            // Set an info window on marker click
+            marker.setOnMarkerClickListener { _, _ ->
+                Toast.makeText(this, "Location: $name", Toast.LENGTH_SHORT).show()
+                true
+            }
+
             mapView!!.overlays.add(marker)
         }
 
-        mapView!!.controller.setCenter(locations[0])
+        mapView!!.controller.setCenter(locations[0].first)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -145,7 +152,10 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item1 -> Toast.makeText(this, "Profile Selected", Toast.LENGTH_SHORT).show()
+            R.id.item1 -> {
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+            }
             R.id.item2 -> Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show()
             R.id.item3 -> showDateTimePicker()
             R.id.item4 -> Toast.makeText(this, "Log out Selected", Toast.LENGTH_SHORT).show()
