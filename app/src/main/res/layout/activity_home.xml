@@ -21,7 +21,8 @@
             android:background="?android:attr/colorPrimary"
             android:title="தமிழ் Roots"
             android:titleTextColor="#FFFFFF"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/CustomOptionMenu"/>
+
 
         <!-- Date & Time TextView -->
         <TextView

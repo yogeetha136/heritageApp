@@ -120,29 +120,22 @@ class HomeActivity : AppCompatActivity() {
 
     private fun addMarkers() {
         val locations = listOf(
-            Pair(GeoPoint(28.6139, 77.2090), "Delhi"),
-            Pair(GeoPoint(12.9716, 77.5946), "Bengaluru"),
-            Pair(GeoPoint(19.0760, 72.8777), "Mumbai"),
-            Pair(GeoPoint(13.0827, 80.2707), "Chennai"),
-            Pair(GeoPoint(22.5726, 88.3639), "Kolkata")
+            GeoPoint(13.0827, 80.2707),  // Chennai
+            GeoPoint(9.9252, 78.1198),   // Madurai
+            GeoPoint(10.7905, 78.7047),  // Trichy
+            GeoPoint(8.0883, 77.5385),   // Kanniyakumari
+            GeoPoint(9.2889, 79.3129)    // Rameshwaram
         )
 
-        for ((point, name) in locations) {
+        for (point in locations) {
             val marker = Marker(mapView)
             marker.position = point
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-            marker.title = name
-
-            // Set an info window on marker click
-            marker.setOnMarkerClickListener { _, _ ->
-                Toast.makeText(this, "Location: $name", Toast.LENGTH_SHORT).show()
-                true
-            }
-
+            marker.title = "Location: " + point.latitude + ", " + point.longitude
             mapView!!.overlays.add(marker)
         }
 
-        mapView!!.controller.setCenter(locations[0].first)
+        mapView!!.controller.setCenter(locations[0])
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -153,6 +146,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item1 -> {
+                Toast.makeText(this, "Profile Selected", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, ProfileActivity::class.java)
                 startActivity(intent)
             }
@@ -164,6 +158,7 @@ class HomeActivity : AppCompatActivity() {
         }
         return true
     }
+
 
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view)

@@ -13,7 +13,6 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        val profileImage = findViewById<CircleImageView>(R.id.profile_image)
         val username = findViewById<TextView>(R.id.tv_username)
         val email = findViewById<TextView>(R.id.tv_email)
         val phone = findViewById<TextView>(R.id.tv_phone)
