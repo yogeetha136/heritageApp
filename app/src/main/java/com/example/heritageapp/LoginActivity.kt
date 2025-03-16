@@ -1,9 +1,10 @@
 package com.example.heritageapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.Toast
+import android.util.Patterns
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -11,47 +12,46 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Initialize views
         val backImage: ImageView = findViewById(R.id.backImage)
-        val loginButton: android.widget.Button = findViewById(R.id.loginButton)
-        val facebookIcon: ImageView = findViewById(R.id.facebookIcon)
-        val googleIcon: ImageView = findViewById(R.id.googleIcon)
-        val emailIcon: ImageView = findViewById(R.id.emailIcon)
+        val loginButton: Button = findViewById(R.id.loginButton)
+        val emailEditText: EditText = findViewById(R.id.emailEditText)
+        val passwordEditText: EditText = findViewById(R.id.passwordEditText)
 
-        // Navigate back to MainActivity when back image is clicked
+        val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+
+        // Navigate back to MainActivity
         backImage.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-        // Handle login button click
         loginButton.setOnClickListener {
-            val fullName = findViewById<android.widget.EditText>(R.id.fullNameEditText).text.toString()
-            val email = findViewById<android.widget.EditText>(R.id.emailEditText).text.toString()
-            val contact = findViewById<android.widget.EditText>(R.id.contactEditText).text.toString()
-            val password = findViewById<android.widget.EditText>(R.id.passwordEditText).text.toString()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
-            if (fullName.isEmpty() || email.isEmpty() || contact.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                // Navigate to HomeActivity
-                val intent = Intent(this, com.example.heritageapp.HomeActivity::class.java)
-                startActivity(intent)
-                finish() // Close LoginActivity
+            if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                showToast("Please enter a valid email")
+                return@setOnClickListener
             }
-        }
+            if (password.isEmpty()) {
+                showToast("Please enter your password")
+                return@setOnClickListener
+            }
 
-        // Social Media Icon Clicks
-        facebookIcon.setOnClickListener {
-            Toast.makeText(this, "Facebook Login", Toast.LENGTH_SHORT).show()
+            val storedEmail = sharedPreferences.getString("email", "") ?: ""
+            val storedPassword = sharedPreferences.getString("password", "") ?: ""
+
+            if (email == storedEmail && password == storedPassword) {
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            } else {
+                showToast("Invalid email or password")
+            }
+
         }
-        googleIcon.setOnClickListener {
-            Toast.makeText(this, "Google Login", Toast.LENGTH_SHORT).show()
-        }
-        emailIcon.setOnClickListener {
-            Toast.makeText(this, "Email Login", Toast.LENGTH_SHORT).show()
-        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="CustomOptionMenu" parent="ThemeOverlay.AppCompat.Light">
-        <!-- Background color of the options menu -->
-        <item name="android:popupBackground">#333333</item> <!-- Dark gray background -->
-
-        <!-- Text color for the menu items -->
-        <item name="android:textColorPrimary">#FFFFFF</item> <!-- White text -->
+    <!-- Main Theme for the App -->
+    <style name="Theme.HeritageApp" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="colorAccent">#FF5722</item>
     </style>
 
+    <!-- Custom Option Menu Theme -->
+    <style name="CustomOptionMenu" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:popupBackground">#FFFFFF</item> <!-- Background color -->
+        <item name="android:textColorPrimary">#000000</item> <!-- White text -->
+    </style>
 </resources>
+
+

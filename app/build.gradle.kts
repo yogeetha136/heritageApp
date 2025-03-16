@@ -46,8 +46,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation ("org.osmdroid:osmdroid-android:6.1.16") // Latest version
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-
+    implementation ("com.mikhaellopez:circularimageview:4.3.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("androidx.cardview:cardview:1.0.0")
 
 
 

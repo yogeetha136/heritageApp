@@ -12,6 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome!"
+            android:textSize="24sp"
+            android:layout_gravity="center"/>
 
         <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
@@ -24,18 +31,6 @@
             app:popupTheme="@style/CustomOptionMenu"/>
 
 
-        <!-- Date & Time TextView -->
-        <TextView
-            android:id="@+id/tv_date_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:text="Date/Time"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#000000"/>
 
         <!-- Menu Icon -->
         <ImageView
@@ -53,7 +48,6 @@
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_date_time"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"

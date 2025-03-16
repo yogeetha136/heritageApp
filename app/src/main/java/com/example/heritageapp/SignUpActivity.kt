@@ -1,27 +1,18 @@
 package com.example.heritageapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.Toast
+import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class SignUpActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        // Back Button: Navigate back to MainActivity
         val backImage: ImageView = findViewById(R.id.backImage)
-        backImage.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        // Get references to views
         val fullNameEditText: EditText = findViewById(R.id.fullNameEditText)
         val ageSpinner: Spinner = findViewById(R.id.ageSpinner)
         val emailEditText: EditText = findViewById(R.id.emailEditText)
@@ -31,20 +22,26 @@ class SignUpActivity : AppCompatActivity() {
         val genderRadioGroup: RadioGroup = findViewById(R.id.genderRadioGroup)
         val signUpButton: Button = findViewById(R.id.signUpButton)
 
-        // Setup age spinner options
         val ageOptions = (18..100).map { it.toString() }
         val ageAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ageOptions)
         ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         ageSpinner.adapter = ageAdapter
 
-        // Handle signup button click
+        val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        backImage.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
         signUpButton.setOnClickListener {
-            val fullName = fullNameEditText.text.toString()
+            val fullName = fullNameEditText.text.toString().trim()
+            val email = emailEditText.text.toString().trim()
+            val contact = contactEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
+            val confirmPassword = confirmPasswordEditText.text.toString().trim()
             val selectedAge = ageSpinner.selectedItem.toString()
-            val email = emailEditText.text.toString()
-            val contactNumber = contactEditText.text.toString()
-            val password = passwordEditText.text.toString()
-            val confirmPassword = confirmPasswordEditText.text.toString()
 
             val selectedGenderId = genderRadioGroup.checkedRadioButtonId
             val selectedGender = if (selectedGenderId != -1) {
@@ -53,23 +50,59 @@ class SignUpActivity : AppCompatActivity() {
                 null
             }
 
-            if (fullName.isEmpty() || email.isEmpty() || contactNumber.isEmpty() ||
-                password.isEmpty() || confirmPassword.isEmpty() || selectedGender == null
-            ) {
-                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            if (!validateInput(fullName, email, contact, password, confirmPassword, selectedGender)) return@setOnClickListener
 
-            if (password != confirmPassword) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            // Save user details in SharedPreferences
+            editor.putString("fullName", fullName)
+            editor.putString("email", email)
+            editor.putString("contact", contact)
+            editor.putString("password", password)
+            editor.putString("age", selectedAge)
+            editor.putString("gender", selectedGender)
+            editor.apply()
 
-            // Show a success message and navigate to HomeActivity
             Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, com.example.heritageapp.HomeActivity::class.java)
-            startActivity(intent)
-            finish() // Close SignUpActivity
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         }
+    }
+
+    private fun validateInput(
+        fullName: String,
+        email: String,
+        contact: String,
+        password: String,
+        confirmPassword: String,
+        gender: String?
+    ): Boolean {
+        if (fullName.isEmpty()) {
+            showToast("Please enter your full name")
+            return false
+        }
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showToast("Please enter a valid email address")
+            return false
+        }
+        if (contact.isEmpty() || contact.length != 10 || !contact.all { it.isDigit() }) {
+            showToast("Please enter a valid 10-digit contact number")
+            return false
+        }
+        if (gender == null) {
+            showToast("Please select your gender")
+            return false
+        }
+        if (password.isEmpty() || password.length < 6) {
+            showToast("Password must be at least 6 characters")
+            return false
+        }
+        if (password != confirmPassword) {
+            showToast("Passwords do not match")
+            return false
+        }
+        return true
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
