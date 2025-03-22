@@ -52,15 +52,11 @@ class HomeActivity : AppCompatActivity() {
             addMarkers()
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.option_menu, menu) // Inflate the menu
+        menuInflater.inflate(R.menu.option_menu, menu)
         return true
     }
-
-
-
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -82,6 +78,27 @@ class HomeActivity : AppCompatActivity() {
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onBackPressed() {
+        showExitDialog() // Show the alert dialog before exiting
+    }
+
+    private fun showExitDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Exit App")
+        builder.setMessage("Are you sure you want to exit?")
+
+        builder.setPositiveButton("Yes") { _, _ ->
+            finish() // Close the activity
+        }
+
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss() // Close the dialog
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 
     private fun showNumberSelectionDialog() {

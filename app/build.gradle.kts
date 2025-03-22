@@ -56,6 +56,9 @@ dependencies {
     implementation("com.google.firebase:firebase-common-ktx")
     implementation("com.google.firebase:firebase-firestore:24.6.0")
     implementation("com.google.firebase:firebase-auth:22.1.2")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.work:work-runtime-ktx:2.7.1")
+
 
 
 
