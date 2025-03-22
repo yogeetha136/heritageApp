@@ -3,7 +3,9 @@ package com.example.heritageapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Patterns
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
@@ -21,7 +23,9 @@ class SignUpActivity : AppCompatActivity() {
         val confirmPasswordEditText: EditText = findViewById(R.id.confirmPasswordEditText)
         val genderRadioGroup: RadioGroup = findViewById(R.id.genderRadioGroup)
         val signUpButton: Button = findViewById(R.id.signUpButton)
+        val progressBar: ProgressBar = findViewById(R.id.progressBar)
 
+        // Populate Age Spinner
         val ageOptions = (18..100).map { it.toString() }
         val ageAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ageOptions)
         ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -52,18 +56,29 @@ class SignUpActivity : AppCompatActivity() {
 
             if (!validateInput(fullName, email, contact, password, confirmPassword, selectedGender)) return@setOnClickListener
 
-            // Save user details in SharedPreferences
-            editor.putString("fullName", fullName)
-            editor.putString("email", email)
-            editor.putString("contact", contact)
-            editor.putString("password", password)
-            editor.putString("age", selectedAge)
-            editor.putString("gender", selectedGender)
-            editor.apply()
+            // Show ProgressBar and disable button
+            progressBar.visibility = View.VISIBLE
+            signUpButton.isEnabled = false
 
-            Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
+            // Simulating a network request (2-second delay)
+            Handler().postDelayed({
+                // Save user details in SharedPreferences
+                editor.putString("fullName", fullName)
+                editor.putString("email", email)
+                editor.putString("contact", contact)
+                editor.putString("password", password)
+                editor.putString("age", selectedAge)
+                editor.putString("gender", selectedGender)
+                editor.apply()
+
+                // Hide ProgressBar and enable button
+                progressBar.visibility = View.GONE
+                signUpButton.isEnabled = true
+
+                Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }, 2000) // 2 seconds delay
         }
     }
 
