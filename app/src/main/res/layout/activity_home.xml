@@ -8,53 +8,32 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <!-- Main Layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF">
-        <TextView
-            android:id="@+id/welcomeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome!"
-            android:textSize="24sp"
-            android:layout_gravity="center"/>
 
         <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?android:attr/colorPrimary"
-            android:title="தமிழ் Roots"
-            android:titleTextColor="#FFFFFF"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/CustomOptionMenu"/>
-
-
-
-        <!-- Menu Icon -->
-        <ImageView
-            android:id="@+id/menu_icon"
-            android:layout_width="36dp"
-            android:layout_height="34dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="12dp"
-            android:contentDescription="Menu Icon"
-            android:src="@drawable/menu" />
 
         <!-- Search Bar -->
         <LinearLayout
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_below="@id/toolbar"
+            android:layout_margin="16dp"
             android:orientation="horizontal"
-            android:background="#8BC34A"
-            android:padding="8dp"
-            android:elevation="4dp">
+            android:background="@android:color/white"
+            android:elevation="4dp"
+            android:padding="8dp">
 
             <EditText
                 android:id="@+id/search_text"
@@ -65,14 +44,14 @@
                 android:padding="8dp"
                 android:background="@android:color/transparent"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/search_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_search"
-                android:contentDescription="Search Icon" />
+                android:contentDescription="Search Icon"/>
         </LinearLayout>
 
         <!-- OpenStreetMap (OSM) View -->
@@ -81,9 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_below="@id/search_bar"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_margin="16dp"/>
 
         <!-- Buttons Grid -->
         <GridLayout
@@ -91,9 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/mapView"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="16dp"
             android:columnCount="2"
             android:rowCount="3">
 
@@ -105,7 +80,7 @@
                 android:layout_margin="8dp"
                 android:text="Food"
                 android:backgroundTint="#4CAF50"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_place"
@@ -115,7 +90,7 @@
                 android:layout_margin="8dp"
                 android:text="Place"
                 android:backgroundTint="#B71C1C"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_cloth"
@@ -125,7 +100,7 @@
                 android:layout_margin="8dp"
                 android:text="Cloth"
                 android:backgroundTint="#FF5722"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_flower"
@@ -135,7 +110,7 @@
                 android:layout_margin="8dp"
                 android:text="Flower"
                 android:backgroundTint="#616161"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_temple"
@@ -145,7 +120,7 @@
                 android:layout_margin="8dp"
                 android:text="Temple"
                 android:backgroundTint="#616161"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_festival"
@@ -155,7 +130,28 @@
                 android:layout_margin="8dp"
                 android:text="Festival"
                 android:backgroundTint="#616161"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"/>
         </GridLayout>
+
+        <!-- WhatsApp Icon -->
+        <ImageView
+            android:id="@+id/whatsapp_icon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/whatsapp_icon"
+            android:contentDescription="WhatsApp Icon"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:focusable="true"/>
     </RelativeLayout>
+
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"/>
 </androidx.drawerlayout.widget.DrawerLayout>

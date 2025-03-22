@@ -40,7 +40,6 @@ class FoodActivity : AppCompatActivity() {
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        menu?.setHeaderTitle("Rate this City")
         menu?.add(0, v?.id!!, 0, "Give a Star Rating")
     }
 

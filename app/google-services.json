@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "737086571325",
+    "project_id": "heritage-app-9df43",
+    "storage_bucket": "heritage-app-9df43.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737086571325:android:cf3765d8ac930a24d1fb54",
+        "android_client_info": {
+          "package_name": "com.example.heritageapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYLObcTSHczxtAGH302nrw_KI0LRho72E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

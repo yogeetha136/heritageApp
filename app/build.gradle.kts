@@ -49,6 +49,13 @@ dependencies {
     implementation ("com.mikhaellopez:circularimageview:4.3.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("androidx.cardview:cardview:1.0.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-common-ktx")
+    implementation("com.google.firebase:firebase-firestore:24.6.0")
+    implementation("com.google.firebase:firebase-auth:22.1.2")
 
 
 
