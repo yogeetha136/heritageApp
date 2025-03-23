@@ -12,7 +12,20 @@
           "package_name": "com.example.heritageapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "737086571325-n51h6uusoju693b7nj38g4l1o522p5ji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.heritageapp",
+            "certificate_hash": "c5323117828502cf794863831bbcc4025ae0af22"
+          }
+        },
+        {
+          "client_id": "737086571325-kpncrmt9t9eme1uq04vgfek368e93kma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAYLObcTSHczxtAGH302nrw_KI0LRho72E"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737086571325-kpncrmt9t9eme1uq04vgfek368e93kma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

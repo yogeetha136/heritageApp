@@ -1,13 +1,17 @@
 package com.example.heritageapp
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -17,7 +21,9 @@ class LoginActivity : AppCompatActivity() {
         val emailEditText: EditText = findViewById(R.id.emailEditText)
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
 
-        val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        // Initialize Firebase
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         // Navigate back to MainActivity
         backImage.setOnClickListener {
@@ -38,17 +44,33 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val storedEmail = sharedPreferences.getString("email", "") ?: ""
-            val storedPassword = sharedPreferences.getString("password", "") ?: ""
-
-            if (email == storedEmail && password == storedPassword) {
-                startActivity(Intent(this, HomeActivity::class.java))
-                finish()
-            } else {
-                showToast("Invalid email or password")
-            }
-
+            // Authenticate User
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener {
+                    fetchUserData(email)
+                }
+                .addOnFailureListener {
+                    showToast("Authentication failed: ${it.message}")
+                }
         }
+    }
+
+    // Fetch user data from Firestore
+    private fun fetchUserData(email: String) {
+        firestore.collection("users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                } else {
+                    showToast("User not found in database")
+                }
+            }
+            .addOnFailureListener {
+                showToast("Error fetching user data: ${it.message}")
+            }
     }
 
     private fun showToast(message: String) {
