@@ -7,14 +7,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-
-
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -55,7 +52,31 @@
         <activity android:name=".ReviewActivity" />
         <activity android:name=".NotificationActivity" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
+        <!-- Explicitly specify android:exported -->
+        <activity
+            android:name="com.dropbox.core.android.AuthActivity"
+            android:exported="true"
+        android:launchMode="singleTask"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="db-3vylpsxluv5rkjn" />
+        </intent-filter>
+    </activity>
 
-    </application>
-</manifest>
+</application>
+
+    </manifest>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#EEEEEE"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/tv_place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#333333" />
+
+    <TextView
+        android:id="@+id/tv_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Review"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginTop="4dp" />
+
+    <ImageView
+        android:id="@+id/review_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+</LinearLayout>
