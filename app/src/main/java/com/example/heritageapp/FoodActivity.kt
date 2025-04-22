@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
@@ -15,21 +16,38 @@ class FoodActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food)
 
+        val gridLayout = findViewById<GridLayout>(R.id.grid1)
+        val fadeInAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in_from_button)
+
+        for (i in 0 until gridLayout.childCount) {
+            val view = gridLayout.getChildAt(i)
+            view.startAnimation(fadeInAnim)
+        }
+
         val backImage: ImageView = findViewById(R.id.btnBack)
+        backImage.startAnimation(fadeInAnim)
         backImage.setOnClickListener {
             finish()
         }
 
-        // Registering all buttons for context menu
         val cityButtons = listOf(
             R.id.btnChennai, R.id.btnMadurai, R.id.btnCoimbatore, R.id.btnTrichy, R.id.btnSalem,
             R.id.btnTirunelveli, R.id.btnErode, R.id.btnThoothukudi, R.id.btnVellore, R.id.btnTanjavur,
-            R.id.btnTirupur, R.id.btnSivakasi, R.id.btnKancheepuram, R.id.btnPollachi, R.id.btnVirudhunagar,
-            R.id.btnDharmapuri
+            R.id.btnTirupur, R.id.btnSivakasi, R.id.btnKancheepuram, R.id.btnPollachi,
+            R.id.btnVirudhunagar, R.id.btnDharmapuri
         )
+
+        val clickAnim = AnimationUtils.loadAnimation(this, R.anim.bounce_scale)
 
         for (buttonId in cityButtons) {
             val button: Button = findViewById(buttonId)
+
+            // Apply click animation on click
+            button.setOnClickListener {
+                it.startAnimation(clickAnim)
+            }
+
+            // Register for context menu
             registerForContextMenu(button)
         }
     }

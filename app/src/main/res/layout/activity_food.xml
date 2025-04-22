@@ -33,7 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:id="@+id/grid1">
 
                 <Button
                     android:id="@+id/btnChennai"

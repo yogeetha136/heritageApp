@@ -1,14 +1,16 @@
 package com.example.heritageapp
 
 import android.Manifest
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.bluetooth.BluetoothAdapter
+import android.os.Build
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -27,6 +29,13 @@ class HomeActivity : AppCompatActivity() {
     private var mapView: MapView? = null
     private val phoneNumbers = arrayOf("9345682720", "9751423916", "8072965118")
 
+    companion object {
+        private const val SMS_PERMISSION_REQUEST_CODE = 101
+        private const val SMS_REQUEST_CODE = 102
+        private const val BLUETOOTH_PERMISSION_REQUEST_CODE = 103
+        private const val BLUETOOTH_ENABLE_REQUEST_CODE = 104
+    }
+
     private val userId: String
         get() = "TN" + (1000 + (Math.random() * 9000).toInt())
 
@@ -39,10 +48,22 @@ class HomeActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
-
+    val btnfood: Button = findViewById(R.id.btn_food)
+        val btnplace: Button = findViewById(R.id.btn_place)
+        val btncloth: Button = findViewById(R.id.btn_cloth)
         requestSmsPermission()
         setupWhatsAppButton()
+btnfood.setOnClickListener{
+    startActivity(Intent(this, FoodActivity::class.java))
+}
+        btnplace.setOnClickListener{
+            startActivity(Intent(this, PlaceActivity::class.java))
 
+        }
+        btncloth.setOnClickListener{
+            startActivity(Intent(this, ClothActivity::class.java))
+
+        }
         mapView = findViewById(R.id.mapView)
         mapView?.apply {
             setTileSource(TileSourceFactory.MAPNIK)
@@ -76,12 +97,53 @@ class HomeActivity : AppCompatActivity() {
                 showNumberSelectionDialog()
                 return true
             }
+            R.id.item6 -> {
+                toggleBluetooth()
+                Toast.makeText(this,"Bluetooth switched on",Toast.LENGTH_SHORT).show()
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
 
+    private fun toggleBluetooth() {
+        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+        if (bluetoothAdapter == null) {
+            Toast.makeText(this, "Bluetooth not supported on this device", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.BLUETOOTH_CONNECT),
+                    BLUETOOTH_PERMISSION_REQUEST_CODE
+                )
+                return
+            }
+        }
+
+        if (!bluetoothAdapter.isEnabled) {
+            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            startActivityForResult(enableBtIntent, BLUETOOTH_ENABLE_REQUEST_CODE)
+        } else {
+            Toast.makeText(this, "Bluetooth is already ON", Toast.LENGTH_SHORT).show()
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == BLUETOOTH_ENABLE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Bluetooth turned ON", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onBackPressed() {
-        showExitDialog() // Show the alert dialog before exiting
+        showExitDialog()
     }
 
     private fun showExitDialog() {
@@ -90,15 +152,14 @@ class HomeActivity : AppCompatActivity() {
         builder.setMessage("Are you sure you want to exit?")
 
         builder.setPositiveButton("Yes") { _, _ ->
-            finish() // Close the activity
+            finish()
         }
 
         builder.setNegativeButton("No") { dialog, _ ->
-            dialog.dismiss() // Close the dialog
+            dialog.dismiss()
         }
 
-        val alertDialog = builder.create()
-        alertDialog.show()
+        builder.create().show()
     }
 
     private fun showNumberSelectionDialog() {
@@ -128,7 +189,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun requestSmsPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.SEND_SMS), SMS_PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.SEND_SMS),
+                SMS_PERMISSION_REQUEST_CODE
+            )
         }
     }
 
@@ -188,8 +253,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        private const val SMS_PERMISSION_REQUEST_CODE = 101
-        private const val SMS_REQUEST_CODE = 102
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == BLUETOOTH_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                toggleBluetooth()
+            } else {
+                Toast.makeText(this, "Bluetooth permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
